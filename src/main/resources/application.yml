@@ -1,0 +1,26 @@
+server:
+  port: 8090
+mybatis:
+  type-aliases-package: com.example.demo.bean
+  mapperLocations: classpath:mapper/*.xml
+  configLocation: classpath:SqlMapConfig.xml
+  
+    
+  
+spring:
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/vue
+        username: root
+        password: root
+        type: org.apache.commons.dbcp.BasicDataSource
+        dbcp2: 
+          max-total: 20
+          
+logging:
+    level:
+      com.example.demo.mapper: DEBUG   
+     
+      
+    
+   
