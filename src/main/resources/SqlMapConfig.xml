@@ -22,12 +22,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 </settings>
 <plugins>
          <!-- com.github.pagehelper为PageHelper类所在包名 -->
-         <!-- 
+       
               <plugin interceptor="com.github.pagehelper.PageInterceptor">
            
      </plugin>
-          -->
- 
+          
 	<plugin interceptor="com.example.demo.utils.UUIDInterceptor"></plugin>
 </plugins>
 </configuration>

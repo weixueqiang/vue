@@ -57,7 +57,7 @@ public class ShiroConfiguration {
 		map.put("/**/.css", "anon");
 		map.put("/**/*.html", "anon");
 		// 登出
-		map.put("/logout", "logout");
+		// map.put("/**/logout", "logout");
 		// 对所有用户认证
 		map.put("/**", "authc");
 		// 登录

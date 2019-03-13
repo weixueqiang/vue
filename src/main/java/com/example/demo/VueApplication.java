@@ -5,7 +5,6 @@ import java.util.Properties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.context.annotation.Bean;
 
 import com.github.pagehelper.PageInterceptor;
 
@@ -20,7 +19,7 @@ public class VueApplication {
 		SpringApplication.run(VueApplication.class, args);
 	}
 
-	@Bean
+	// @Bean
 	public PageInterceptor pageInterceptor() {
 		PageInterceptor pageHelper = new PageInterceptor();
 		Properties properties = new Properties();
