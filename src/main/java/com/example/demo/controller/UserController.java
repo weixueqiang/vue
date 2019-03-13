@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,9 @@ public class UserController {
 
 	@RequestMapping("list")
 	public CallResult list() {
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
+		System.out.println("session--;" + session);
 		return CallResult.ok(userMapper.selectAll());
 	}
 
@@ -49,8 +53,8 @@ public class UserController {
 	}
 
 	@RequestMapping("get")
-	public CallResult save(Integer id) {
-		if (id == null) {
+	public CallResult get(String id) {
+		if (StringUtils.isEmpty(id)) {
 			return CallResult.err("请正确填写数据");
 		}
 		return CallResult.ok(userMapper.selectByPrimaryKey(id));
@@ -59,7 +63,7 @@ public class UserController {
 	@RequestMapping("login")
 	public CallResult login(String username, String password) {
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken(username, password, false);
+		UsernamePasswordToken token = new UsernamePasswordToken(username, password, true);
 		if (!subject.isAuthenticated()) {
 			try {
 				subject.login(token);
@@ -67,6 +71,8 @@ public class UserController {
 				return CallResult.err("用户名或密码错误");
 			}
 		}
+		Session session = subject.getSession();
+		System.out.println("session--;" + session);
 		return CallResult.ok();
 	}
 
@@ -77,6 +83,12 @@ public class UserController {
 		}
 
 		return CallResult.err("用户名或密码错误");
+	}
+
+	@RequestMapping("info")
+	public CallResult info() {
+		Subject subject = SecurityUtils.getSubject();
+		return CallResult.ok(subject.getPrincipal());
 	}
 
 }

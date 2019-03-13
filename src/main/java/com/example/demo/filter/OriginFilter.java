@@ -32,11 +32,12 @@ public class OriginFilter implements Filter {
 		response.setHeader("Vary", "Origin");
 		response.setHeader("P3P",
 				"CP=CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"); // 解决IE下跨域写cookie问题
-		response.setHeader("Access-Control-Allow-Methods", "GET");
+		response.setHeader("Access-Control-Allow-Methods", "GET,POST");
 		response.setHeader("Access-Control-Max-Age", "3600");
 		response.setHeader("Access-Control-Allow-Headers",
 				"Origin, X-Requested-With, Content-Type, Accept, X-CSRF-TOKEN");
 		response.setHeader("Access-Control-Allow-Credentials", "true"); // 解决跨域cookie丢失
+		// 解决跨域cookie丢失
 		filterChain.doFilter(servletRequest, servletResponse);
 	}
 

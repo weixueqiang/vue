@@ -24,7 +24,7 @@ public class CrossFilter extends AccessControlFilter {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		String origin = request.getHeader("Origin");
 		response.setHeader("Vary", "Accept-Encoding,Origin");
-		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Origin", origin);
 		response.setHeader("Access-Control-Allow-Credentials", "true");
 		response.setHeader("P3P", "CP='IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT'");// ie,p3p规范
 		if ("OPTIONS".equals(request.getMethod())) {

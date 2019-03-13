@@ -1,6 +1,5 @@
 package com.example.demo.config;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -43,7 +42,7 @@ public class ShiroConfiguration {
 	@Bean(name = "shiroFilter")
 	public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-		Map<String, Filter> filters = new HashMap<>();
+		Map<String, Filter> filters = new LinkedHashMap<>();
 		filters.put("cross", new CrossFilter());
 		shiroFilterFactoryBean.setFilters(filters);
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -56,10 +55,11 @@ public class ShiroConfiguration {
 		map.put("/**/auth/authz", "anon");
 		map.put("/**/.js", "anon");
 		map.put("/**/.css", "anon");
+		map.put("/**/*.html", "anon");
 		// 登出
 		map.put("/logout", "logout");
 		// 对所有用户认证
-		// map.put("/**", "cross,authc");
+		map.put("/**", "authc");
 		// 登录
 		// shiroFilterFactoryBean.setLoginUrl("/index.html");
 		shiroFilterFactoryBean.setLoginUrl("/auth/authz");
@@ -108,6 +108,7 @@ public class ShiroConfiguration {
 	@Bean
 	public SimpleCookie simpleCookie() {
 		SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
+		simpleCookie.setPath("/");
 		simpleCookie.setMaxAge(2592000);
 		return simpleCookie;
 	}
