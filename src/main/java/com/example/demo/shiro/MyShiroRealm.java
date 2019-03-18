@@ -31,6 +31,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 		UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
 		String username = token.getUsername();
 		User record = new User();
+
 		record.setUsername(username);
 		User user = userMapper.selectOne(record);
 		if (user == null) {

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
@@ -28,8 +29,14 @@ public class UserController {
 	@Resource
 	private UserMapper userMapper;
 
+	private Logger logger = Logger.getLogger(this.getClass());
+
 	@RequestMapping("list")
 	public CallResult list() {
+		logger.info("测试info输出");
+		logger.warn("测试warn输出");
+		logger.error("测试error输出__");
+		logger.debug("测试debug输出");
 		return CallResult.ok(userMapper.selectAll());
 	}
 
@@ -48,6 +55,7 @@ public class UserController {
 	@RequestMapping("save")
 	public CallResult save(User user) {
 		Example example = new Example(User.class);
+
 		Criteria criteria = example.createCriteria().andEqualTo("username", user.getUsername());
 		boolean exist = userMapper.selectByExample(example).stream().anyMatch(e -> !e.getId().equals(user.getId()));
 		if (exist) {

@@ -21,6 +21,7 @@ public class VueApplication {
 
 	// @Bean
 	public PageInterceptor pageInterceptor() {
+
 		PageInterceptor pageHelper = new PageInterceptor();
 		Properties properties = new Properties();
 		properties.setProperty("offsetAsPageNum", "true");
