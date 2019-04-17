@@ -1,5 +1,8 @@
 package com.example.demo.shiro;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.annotation.Resource;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -8,6 +11,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
@@ -22,7 +26,14 @@ public class MyShiroRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 		System.out.println("ko.....");
-		return null;
+		Object principal = principalCollection.getPrimaryPrincipal();
+		User u = (User) principal;
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		Set<String> permissions = new HashSet<>();
+		permissions.add("user:info");
+		permissions.add("user:list");
+		info.setStringPermissions(permissions);
+		return info;
 	}
 
 	@Override

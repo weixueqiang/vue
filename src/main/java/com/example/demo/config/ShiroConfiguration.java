@@ -12,6 +12,8 @@ import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,6 +22,15 @@ import com.example.demo.shiro.MyShiroRealm;
 
 @Configuration
 public class ShiroConfiguration {
+
+	/**
+	 * <bean class=
+	 * "org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+	 * <property name="securityManager" ref="securityManager" /> </bean>
+	 * 
+	 * @date 2019年3月20日 下午2:23:59
+	 * @author weixueqiang
+	 */
 
 	// 将自己的验证方式加入容器
 	@Bean
@@ -59,7 +70,7 @@ public class ShiroConfiguration {
 		// 登出
 		// map.put("/**/logout", "logout");
 		// 对所有用户认证
-		map.put("/**", "authc");
+		// map.put("/**", "authc");
 		// 登录
 		// shiroFilterFactoryBean.setLoginUrl("/index.html");
 		shiroFilterFactoryBean.setLoginUrl("/auth/authz");
@@ -126,5 +137,13 @@ public class ShiroConfiguration {
 		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
 		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
 		return authorizationAttributeSourceAdvisor;
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+		DefaultAdvisorAutoProxyCreator defaultAAP = new DefaultAdvisorAutoProxyCreator();
+		defaultAAP.setProxyTargetClass(true);
+		return defaultAAP;
 	}
 }

@@ -21,11 +21,12 @@ public class AuthController {
 		Session session = subject.getSession();
 		System.out.println("session--;" + session);
 		if (!subject.isAuthenticated()) {
-
 			result.fail("未认证");
 			result.setCode(401);
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return result;
+		} else {
+			result.fail("没有权限");
 		}
 		return result;
 	}

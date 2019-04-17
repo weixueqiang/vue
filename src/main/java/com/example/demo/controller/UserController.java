@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.util.StringUtils;
@@ -41,6 +42,7 @@ public class UserController {
 	}
 
 	@RequestMapping("pageList")
+	@RequiresPermissions("user:list")
 	public PageInfo<User> pageList(PageInfo<User> page, User user) {
 		PageHelper.startPage(page.getPageNum(), page.getPageSize());
 		Example example = new Example(User.class);
@@ -115,6 +117,7 @@ public class UserController {
 	}
 
 	@RequestMapping("info")
+	@RequiresPermissions("user:info")
 	public CallResult info() {
 		Subject subject = SecurityUtils.getSubject();
 		return CallResult.ok(subject.getPrincipal());
@@ -124,6 +127,13 @@ public class UserController {
 	public CallResult logout() {
 		Subject subject = SecurityUtils.getSubject();
 		subject.logout();
+		return CallResult.ok();
+	}
+
+	@RequestMapping("/permission")
+	@RequiresPermissions("user:permission")
+	public CallResult noPermission() {
+		System.err.println("没有权限");
 		return CallResult.ok();
 	}
 
