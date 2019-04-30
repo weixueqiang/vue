@@ -4,16 +4,66 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
-
-@Data
 public class Resource implements Serializable {
 
+	/**
+	 * @date 2019年4月30日 下午5:03:28
+	 * @author weixueqiang
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
 	private String parentName;
 	private Integer parentId;
 	private List<Resource> children;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
+
+	public Integer getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
+
+	public List<Resource> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Resource> children) {
+		this.children = children;
+	}
+
+	public static List<Resource> getResources() {
+		return resources;
+	}
+
+	public static void setResources(List<Resource> resources) {
+		Resource.resources = resources;
+	}
 
 	public Resource(Integer id, String name, Integer parentId) {
 		super();

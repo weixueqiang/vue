@@ -17,6 +17,8 @@ public class DefaultExceptionHandler {
 		ex.printStackTrace();
 		if (ex instanceof AuthorizationException) {
 			result.fail("没有权限访问");
+		} else {
+			result.fail("发生异常");
 		}
 		return result;
 	}
