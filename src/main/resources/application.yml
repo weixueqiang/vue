@@ -10,9 +10,9 @@ mybatis:
 spring:
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/vue
+        url: jdbc:mysql://192.168.1.11:3306/vue?characterEncoding=utf8
         username: root
-        password: root
+        password: 'r4t5#$%y6u7'
         type: org.apache.commons.dbcp.BasicDataSource
         dbcp2: 
           max-total: 20

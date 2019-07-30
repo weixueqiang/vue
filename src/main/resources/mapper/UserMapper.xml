@@ -9,5 +9,8 @@
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
+    
+    
   </resultMap>
+  
 </mapper>

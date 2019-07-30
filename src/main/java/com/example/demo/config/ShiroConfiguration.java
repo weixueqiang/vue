@@ -15,12 +15,11 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import com.example.demo.shiro.CrossFilter;
 import com.example.demo.shiro.MyShiroRealm;
 
-@Configuration
+//@Configuration
 public class ShiroConfiguration {
 
 	/**
@@ -70,7 +69,7 @@ public class ShiroConfiguration {
 		// 登出
 		// map.put("/**/logout", "logout");
 		// 对所有用户认证
-		// map.put("/**", "authc");
+		map.put("/**", "authc");
 		// 登录
 		// shiroFilterFactoryBean.setLoginUrl("/index.html");
 		shiroFilterFactoryBean.setLoginUrl("/auth/authz");
