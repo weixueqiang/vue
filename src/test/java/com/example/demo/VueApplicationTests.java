@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.annotation.Resource;
 
@@ -22,7 +23,43 @@ public class VueApplicationTests {
 
 	@Resource
 	UserMapper userMapper;
-
+	
+	
+	public static <T> Consumer<T> getOut(){
+		return System.out::println;
+	}
+	
+	@Test
+	public void start() {
+		System.out.println(userMapper+"..........");
+	}
+	
+	@Test
+	public void invokeProcedure() {
+		User user=new User();
+		user.setAge(3);
+		user.setUsername("yjl");
+		userMapper.procedureTest(user);
+		System.out.println("over.......");
+	}
+	
+	@Test
+	public void invokeProcedureSelect() {
+		User user=new User();
+		user.setAge(100);
+		user.setUsername("yjl");
+		List<User> datas = userMapper.procedureSel(user);
+		System.out.println("over.......");
+		datas.forEach(getOut());
+	}
+	
+	@Test
+	public void many() {
+		List<User> datas = userMapper.manyPrint();
+		System.out.println("over.......");
+		datas.forEach(getOut());
+	}
+	
 	@Test
 	public void contextLoads() {
 		System.out.println(userMapper);

@@ -13,4 +13,36 @@
     
   </resultMap>
   
+  <select id="procedureTest"  statementType="CALLABLE">
+  		CALL batchCreate(#{age},#{username}) 
+  </select>
+  <!-- create procedure batchCreate(in n int,in username VARCHAR(20))
+	begin 
+		declare i int default 0;
+		while i<n do 
+			INSERT INTO user (id, username, password, sex, create_Time, age) 
+				VALUES (UUID_SHORT(), CONCAT(username,i), '123456', '男', NOW(), '12');
+			set i=i+1;
+		end while;
+	end; -->
+	<select id="procedureSel" statementType="CALLABLE" resultType="com.example.demo.bean.User">
+		CALL sel(#{age})
+	</select>
+	<!-- CREATE procedure sel(in age_ int)
+	begin 
+		SELECT * from user WHERE age<age_;
+	end; -->
+	
+	<select id="manyPrint" statementType="CALLABLE" resultType="com.example.demo.bean.User">
+		call manyPrint();
+	</select>
+	<!-- 
+	create procedure manyPrint()
+	begin 
+		SELECT 1 as age;
+		SELECT 2 as age;
+		SELECT 3 as age;
+	end 
+	 -->
+	
 </mapper>

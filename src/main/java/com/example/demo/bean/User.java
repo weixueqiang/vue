@@ -91,9 +91,12 @@ public class User implements Serializable {
 		this.sex = sex;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", sex=" + sex + "]";
+		return "User [id=" + id + ", age=" + age + ", username=" + username + ", password=" + password + ", sex=" + sex
+				+ ", createTime=" + createTime + "]";
 	}
 
 	public Integer getAge() {
